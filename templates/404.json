@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "404-content": {
+      "type": "main-404",
+      "settings": {}
+    }
+  },
+  "order": ["404-content"]
+}

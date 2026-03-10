@@ -1,0 +1,81 @@
+{% comment %} sections/collection-template.liquid {% endcomment %}
+
+<div style="padding-top: 80px;">
+
+  <!-- Page hero -->
+  <div class="page-hero">
+    <div class="container">
+      <p class="section-subtitle">{{ collection.title }}</p>
+      <h1 class="section-title">{{ collection.title }}</h1>
+      <div class="gold-divider"></div>
+      {%- if collection.description != blank -%}
+        <p class="text-muted mt-3" style="max-width:560px; margin-left:auto; margin-right:auto;">{{ collection.description }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="container section-pad" style="padding-top: 40px;">
+
+    <!-- Filter & Sort bar -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      {%- for tag in collection.all_tags limit: 6 -%}
+        <button class="filter-btn" data-filter="{{ tag | handle }}">{{ tag }}</button>
+      {%- endfor -%}
+
+      <select class="sort-select" id="collection-sort"
+              onchange="window.location.search = '?sort_by=' + this.value">
+        <option value="manual"        {% if collection.sort_by == 'manual' %}selected{% endif %}>Featured</option>
+        <option value="created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>New Arrivals</option>
+        <option value="price-ascending"  {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: Low → High</option>
+        <option value="price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: High → Low</option>
+        <option value="best-selling"  {% if collection.sort_by == 'best-selling' %}selected{% endif %}>Best Selling</option>
+      </select>
+    </div>
+
+    <!-- Product grid -->
+    <div class="row g-4">
+      {%- if collection.products.size > 0 -%}
+        {%- for product in collection.products -%}
+          <div class="col-6 col-md-4 col-lg-3 fade-up">
+            {% render 'product-card', product: product %}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="col-12 text-center py-5">
+          <p class="text-muted">No products found in this collection.</p>
+          <a href="{{ routes.collections_url }}" class="btn-outline-gold mt-3 d-inline-block">Browse All Collections</a>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Pagination -->
+    {%- if paginate.pages > 1 -%}
+      {% paginate collection.products by 12 %}
+        <div class="pagination-zd">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" aria-label="Previous">‹</a>
+          {%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}">{{ part.title }}</a>
+            {%- else -%}
+              <span class="current">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" aria-label="Next">›</a>
+          {%- endif -%}
+        </div>
+      {% endpaginate %}
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": []
+}
+{% endschema %}

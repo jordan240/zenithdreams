@@ -1,0 +1,155 @@
+{% comment %} sections/cart-template.liquid {% endcomment %}
+
+<div style="padding-top: 100px;" class="section-pad">
+  <div class="container">
+
+    <div class="text-center mb-5 fade-up">
+      <p class="section-subtitle">Review &amp; Checkout</p>
+      <h1 class="section-title">Your Cart</h1>
+      <div class="gold-divider"></div>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+
+      <div class="row g-4 g-lg-5">
+
+        <!-- Cart items table -->
+        <div class="col-12 col-lg-8 fade-up">
+          <form action="{{ routes.cart_url }}" method="post" id="cart-form">
+            <table class="cart-table">
+              <thead>
+                <tr>
+                  <th style="text-align:left; padding-right:1rem;">Product</th>
+                  <th style="text-align:left;">Details</th>
+                  <th style="text-align:center;">Qty</th>
+                  <th style="text-align:right;">Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for item in cart.items -%}
+                  <tr>
+                    <!-- Image -->
+                    <td style="width:90px; padding-right:1rem;">
+                      <a href="{{ item.url }}">
+                        <div class="cart-item-image">
+                          {%- if item.image -%}
+                            <img src="{{ item.image | image_url: width: 160 }}"
+                                 alt="{{ item.title | escape }}"
+                                 loading="lazy">
+                          {%- else -%}
+                            <div class="img-placeholder" style="height:100%;">
+                              <span>{{ item.title | truncate: 10 }}</span>
+                            </div>
+                          {%- endif -%}
+                        </div>
+                      </a>
+                    </td>
+
+                    <!-- Info -->
+                    <td>
+                      <a href="{{ item.url }}" style="font-family:var(--font-serif); font-size:0.95rem; color:var(--text-primary); text-decoration:none; display:block; margin-bottom:0.25em;">
+                        {{ item.product.title }}
+                      </a>
+                      {%- unless item.variant.title == 'Default Title' -%}
+                        <span style="font-size:0.78rem; color:var(--text-secondary);">{{ item.variant.title }}</span>
+                      {%- endunless -%}
+                      <div style="font-size:0.82rem; color:var(--accent); margin-top:0.3em;">{{ item.price | money }}</div>
+                    </td>
+
+                    <!-- Quantity -->
+                    <td style="text-align:center;">
+                      <div class="qty-selector" style="margin:0 auto;">
+                        <button type="button" class="qty-btn" data-action="decrease"
+                                onclick="this.closest('tr').querySelector('.qty-input').stepDown(); this.closest('form').submit();">−</button>
+                        <input type="number"
+                               name="updates[{{ item.id }}]"
+                               value="{{ item.quantity }}"
+                               min="0"
+                               class="qty-input"
+                               aria-label="Quantity for {{ item.title | escape }}">
+                        <button type="button" class="qty-btn" data-action="increase"
+                                onclick="this.closest('tr').querySelector('.qty-input').stepUp(); this.closest('form').submit();">+</button>
+                      </div>
+                    </td>
+
+                    <!-- Line total -->
+                    <td style="text-align:right; color:var(--text-primary); font-size:0.92rem;">
+                      {{ item.line_price | money }}
+                    </td>
+
+                    <!-- Remove -->
+                    <td style="text-align:right; padding-left:0.5rem;">
+                      <a href="{{ routes.cart_change_url }}?id={{ item.id }}&quantity=0"
+                         aria-label="Remove {{ item.title | escape }}"
+                         style="color:var(--text-secondary); font-size:0.9rem; transition:color 0.2s;"
+                         onmouseover="this.style.color='#ff4444'" onmouseout="this.style.color=''">
+                        ×
+                      </a>
+                    </td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+
+            <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap gap-3">
+              <a href="{{ routes.collections_url }}" class="btn-outline-gold">← Continue Shopping</a>
+              <button type="submit" name="update"
+                      class="btn-outline-gold" style="cursor:pointer;">Update Cart</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Order summary -->
+        <div class="col-12 col-lg-4 fade-up">
+          <div class="cart-totals">
+            <h3 style="font-family:var(--font-serif); font-size:1.2rem; margin-bottom:1.5rem; letter-spacing:0.05em;">Order Summary</h3>
+
+            <div class="cart-totals-row">
+              <span>Subtotal ({{ cart.item_count }} item{{ cart.item_count | plural: '', 's' }})</span>
+              <strong>{{ cart.total_price | money }}</strong>
+            </div>
+            <div class="cart-totals-row">
+              <span>Shipping</span>
+              <strong>Calculated at checkout</strong>
+            </div>
+            <div class="cart-totals-row">
+              <span>Estimated Total</span>
+              <strong style="color:var(--accent);">{{ cart.total_price | money }}</strong>
+            </div>
+
+            <form action="{{ routes.cart_url }}/checkout" method="post" class="mt-4">
+              <button type="submit" class="btn-gold w-100" style="font-size:0.82rem;">
+                Proceed to Checkout
+              </button>
+            </form>
+
+            <!-- Payment icons hint -->
+            <p style="font-size:0.7rem; color:var(--text-secondary); text-align:center; margin-top:1rem;">
+              Secure checkout · Visa · Mastercard · Amex · PayPal · Apple Pay
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    {%- else -%}
+
+      <div class="text-center py-5 fade-up">
+        <p style="font-size:3.5rem; margin-bottom:1rem;">🛍️</p>
+        <h2 style="font-family:var(--font-serif); font-size:1.6rem; margin-bottom:0.8rem;">Your cart is empty</h2>
+        <p class="text-muted mb-4">Looks like you haven't added anything yet. Start exploring.</p>
+        <a href="{{ routes.collections_url }}" class="btn-gold">Shop Now</a>
+      </div>
+
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

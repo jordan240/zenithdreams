@@ -1,0 +1,78 @@
+{
+  "sections": {
+    "door-entrance": {
+      "type": "door-entrance",
+      "settings": {
+        "enable_doors": true,
+        "brand_name": "Zenith Dreams",
+        "tagline": "Luxury Streetwear",
+        "cta_text": "Click to Enter"
+      }
+    },
+    "hero-banner": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow": "New Season 2026",
+        "heading": "Elevate Your Style",
+        "subheading": "Luxury meets streetwear. Discover the newest collection from Zenith Dreams — where every piece tells a story.",
+        "cta_text": "Shop Now"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "subtitle": "Just Dropped",
+        "title": "New Arrivals",
+        "products_to_show": 4,
+        "show_view_all": true,
+        "view_all_text": "View All"
+      }
+    },
+    "lookbook": {
+      "type": "lookbook",
+      "blocks": {
+        "lookbook-item-1": {
+          "type": "lookbook_item",
+          "settings": {
+            "eyebrow": "Our Story",
+            "heading": "Crafted for the Bold",
+            "body": "Zenith Dreams was born at the intersection of luxury and street culture. Every stitch carries intention — premium fabrics, refined silhouettes, and an unapologetic attitude toward self-expression.",
+            "cta_text": "Discover More",
+            "cta_link": "/pages/about"
+          }
+        }
+      },
+      "block_order": ["lookbook-item-1"]
+    },
+    "collections-grid": {
+      "type": "collections-grid",
+      "settings": {
+        "subtitle": "Browse by Category",
+        "title": "Our Collections"
+      },
+      "blocks": {
+        "card-1": { "type": "collection_card", "settings": { "name": "Hoodies" } },
+        "card-2": { "type": "collection_card", "settings": { "name": "Tees" } },
+        "card-3": { "type": "collection_card", "settings": { "name": "Outerwear" } },
+        "card-4": { "type": "collection_card", "settings": { "name": "Accessories" } }
+      },
+      "block_order": ["card-1", "card-2", "card-3", "card-4"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "subtitle": "Exclusive Access",
+        "title": "Join the Dream",
+        "button_text": "Subscribe"
+      }
+    }
+  },
+  "order": [
+    "door-entrance",
+    "hero-banner",
+    "featured-collection",
+    "lookbook",
+    "collections-grid",
+    "newsletter"
+  ]
+}

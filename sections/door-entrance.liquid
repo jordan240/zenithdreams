@@ -1,0 +1,75 @@
+{% comment %} sections/door-entrance.liquid {% endcomment %}
+
+{% if section.settings.enable_doors %}
+<div id="door-entrance" aria-label="Store entrance" role="dialog">
+  <!-- Ambient glow -->
+  <div class="door-glow"></div>
+
+  <!-- Top / bottom border accents -->
+  <div class="door-border-top"></div>
+  <div class="door-border-bottom"></div>
+
+  <!-- Left door -->
+  <div class="door" id="door-left">
+    <div class="door-panel door-panel-top"></div>
+    <div class="door-panel door-panel-bottom"></div>
+    <div class="door-handle"></div>
+  </div>
+
+  <!-- Right door -->
+  <div class="door" id="door-right">
+    <div class="door-panel door-panel-top"></div>
+    <div class="door-panel door-panel-bottom"></div>
+    <div class="door-handle"></div>
+  </div>
+
+  <!-- Centred branding overlay -->
+  <div class="door-branding">
+    <div class="brand-logo">{{ section.settings.brand_name | default: shop.name }}</div>
+    <div class="brand-tagline">{{ section.settings.tagline | default: 'Luxury Streetwear' }}</div>
+    <button class="enter-cta" type="button" aria-label="Enter the store">
+      {{ section.settings.cta_text | default: 'Click to Enter' }}
+    </button>
+  </div>
+</div>
+
+<script src="{{ 'doors.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Door Entrance",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_doors",
+      "label": "Enable door entrance",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name on doors",
+      "default": "Zenith Dreams"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Luxury Streetwear"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "Click to Enter"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Door Entrance",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

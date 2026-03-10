@@ -1,0 +1,24 @@
+{% comment %} sections/main-404.liquid {% endcomment %}
+
+<div class="page-404 section-pad" style="padding-top:120px;">
+  <div class="container text-center fade-up">
+    <div class="number-404">404</div>
+    <h1 style="font-family:var(--font-serif); font-size:clamp(1.4rem,3vw,2rem); margin-bottom:0.8rem;">
+      Page Not Found
+    </h1>
+    <p class="text-muted mb-5" style="max-width:400px; margin-left:auto; margin-right:auto; font-size:0.92rem;">
+      The page you're looking for has stepped out of the spotlight. Let's get you back on track.
+    </p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="{{ routes.root_url }}" class="btn-gold">Back to Home</a>
+      <a href="{{ routes.collections_url }}" class="btn-outline-gold">Browse Collections</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,235 @@
+/* ============================================================
+   ZENITH DREAMS — Door Entrance Styles
+   ============================================================ */
+
+/* ── Overlay container ─────────────────────────────────────── */
+#door-entrance {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#door-entrance.doors-open #door-left {
+  transform: perspective(1200px) rotateY(-110deg);
+}
+
+#door-entrance.doors-open #door-right {
+  transform: perspective(1200px) rotateY(110deg);
+}
+
+#door-entrance.doors-gone {
+  display: none;
+}
+
+/* ── Individual doors ──────────────────────────────────────── */
+.door {
+  flex: 1;
+  position: relative;
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  transform-origin: outside;
+  overflow: hidden;
+}
+
+#door-left {
+  transform: perspective(1200px) rotateY(0deg);
+  transform-origin: left center;
+  background:
+    linear-gradient(135deg, #1a1208 0%, #0d0d0d 40%, #1a1208 60%, #0d0d0d 100%);
+  border-right: 1px solid #c9a84c44;
+  box-shadow: inset -6px 0 24px rgba(0,0,0,0.7);
+}
+
+#door-right {
+  transform: perspective(1200px) rotateY(0deg);
+  transform-origin: right center;
+  background:
+    linear-gradient(225deg, #1a1208 0%, #0d0d0d 40%, #1a1208 60%, #0d0d0d 100%);
+  border-left: 1px solid #c9a84c44;
+  box-shadow: inset 6px 0 24px rgba(0,0,0,0.7);
+}
+
+/* ── Wood-grain texture overlay ────────────────────────────── */
+.door::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    170deg,
+    transparent 0px,
+    rgba(201,168,76,0.04) 1px,
+    transparent 2px,
+    transparent 8px
+  );
+  pointer-events: none;
+}
+
+/* ── Door panel inset detail ───────────────────────────────── */
+.door-panel {
+  position: absolute;
+  border: 1px solid rgba(201,168,76,0.25);
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.5), 0 0 6px rgba(201,168,76,0.05);
+  pointer-events: none;
+}
+
+#door-left .door-panel-top    { inset: 8% 12% auto; height: 28%; }
+#door-left .door-panel-bottom { inset: auto 12% 8%; height: 40%; }
+#door-right .door-panel-top   { inset: 8% 12% auto; height: 28%; }
+#door-right .door-panel-bottom{ inset: auto 12% 8%; height: 40%; }
+
+/* ── Door knob / handle ────────────────────────────────────── */
+.door-handle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 50px;
+  border-radius: 7px;
+  background: linear-gradient(180deg, #e0c068, #c9a84c 40%, #a07830 80%, #c9a84c);
+  box-shadow: 0 0 10px rgba(201,168,76,0.4), 0 2px 6px rgba(0,0,0,0.6);
+}
+
+#door-left  .door-handle { right: 14px; }
+#door-right .door-handle { left: 14px; }
+
+/* ── Vertical door seam ─────────────────────────────────────── */
+#door-entrance::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #c9a84c44 20%,
+    #c9a84c88 50%,
+    #c9a84c44 80%,
+    transparent
+  );
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.4s;
+}
+
+#door-entrance.doors-open::after {
+  opacity: 0;
+}
+
+/* ── Branding overlay ──────────────────────────────────────── */
+.door-branding {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+
+#door-entrance.doors-open .door-branding {
+  opacity: 0;
+}
+
+.door-branding .brand-logo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 0 40px rgba(201,168,76,0.6), 0 2px 12px rgba(0,0,0,0.9);
+  margin-bottom: 0.35em;
+}
+
+.door-branding .brand-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  margin-bottom: 2.2em;
+}
+
+.door-branding .enter-cta {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  border: 1px solid #c9a84c;
+  padding: 0.7em 2em;
+  border-radius: 2px;
+  background: transparent;
+  animation: ctaPulse 2.4s ease-in-out infinite;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.door-branding .enter-cta:hover {
+  background: #c9a84c22;
+  color: #e0c068;
+  border-color: #e0c068;
+}
+
+@keyframes ctaPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(201,168,76,0.35); }
+  50%       { opacity: 0.75; box-shadow: 0 0 0 8px rgba(201,168,76,0); }
+}
+
+/* ── Light glow that appears behind doors when opening ──────── */
+.door-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.12) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.9s 0.3s;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#door-entrance.doors-open .door-glow {
+  opacity: 1;
+}
+
+/* ── Ambient top/bottom border accents ──────────────────────── */
+.door-border-top,
+.door-border-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #c9a84c55, #c9a84c, #c9a84c55, transparent);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.door-border-top    { top: 0; }
+.door-border-bottom { bottom: 0; }
+
+/* ── Mobile: flat slide instead of 3-D rotate ───────────────── */
+@media (max-width: 767px) {
+  #door-left {
+    transform: none;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  #door-right {
+    transform: none;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  #door-entrance.doors-open #door-left {
+    transform: translateX(-100%);
+  }
+  #door-entrance.doors-open #door-right {
+    transform: translateX(100%);
+  }
+}

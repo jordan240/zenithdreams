@@ -1,0 +1,120 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Zenith Dreams",
+    "theme_author": "Zenith Dreams",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "https://github.com/jordan240/zenithdreams",
+    "theme_support_url": "https://github.com/jordan240/zenithdreams"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_bg_primary",
+        "label": "Primary background",
+        "default": "#0a0a0a"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_secondary",
+        "label": "Secondary background",
+        "default": "#1a1a1a"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent / Gold",
+        "default": "#c9a84c"
+      },
+      {
+        "type": "color",
+        "id": "color_text_primary",
+        "label": "Primary text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_text_secondary",
+        "label": "Secondary text",
+        "default": "#b0b0b0"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "playfair_display_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body font",
+        "default": "inter_n4"
+      }
+    ]
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand name",
+        "default": "Zenith Dreams"
+      },
+      {
+        "type": "textarea",
+        "id": "brand_description",
+        "label": "Brand description",
+        "default": "Luxury streetwear for the bold."
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter",
+        "label": "X / Twitter URL"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      }
+    ]
+  },
+  {
+    "name": "Door Entrance",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_door_entrance",
+        "label": "Enable door entrance on homepage",
+        "default": true
+      }
+    ]
+  }
+]

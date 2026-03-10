@@ -1,0 +1,58 @@
+{% comment %}
+  snippets/product-card.liquid
+  Usage: {% render 'product-card', product: product %}
+{% endcomment %}
+
+<div class="product-card">
+  <a href="{{ product.url }}" class="text-decoration-none" tabindex="-1" aria-hidden="true">
+    <div class="product-card-image-wrap">
+      {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | image_url: width: 600 }}"
+             alt="{{ product.featured_image.alt | escape | default: product.title }}"
+             loading="lazy"
+             width="600" height="800">
+      {%- else -%}
+        <div class="img-placeholder">
+          <span>{{ product.title | truncate: 20 }}</span>
+        </div>
+      {%- endif -%}
+
+      <div class="product-card-overlay">
+        <button class="btn-outline-gold"
+                style="font-size:0.68rem; padding:0.6em 1.4em;"
+                type="button"
+                aria-label="Quick view {{ product.title | escape }}">
+          Quick View
+        </button>
+      </div>
+    </div>
+  </a>
+
+  <div class="product-card-body">
+    <a href="{{ product.url }}" class="text-decoration-none">
+      <div class="product-card-title">{{ product.title }}</div>
+    </a>
+
+    <div class="product-card-price">
+      {{ product.price | money }}
+      {%- if product.compare_at_price > product.price -%}
+        <s>{{ product.compare_at_price | money }}</s>
+      {%- endif -%}
+      {%- unless product.available -%}
+        <span style="font-size:0.7rem; color:var(--text-secondary); margin-left:0.5em;">Sold Out</span>
+      {%- endunless -%}
+    </div>
+
+    {%- if product.available -%}
+      <button class="btn-add-cart"
+              type="button"
+              data-product-id="{{ product.variants.first.id }}"
+              aria-label="Add {{ product.title | escape }} to cart">
+        Add to Cart
+      </button>
+    {%- else -%}
+      <button class="btn-add-cart" type="button" disabled
+              style="opacity:0.4; cursor:not-allowed;">Sold Out</button>
+    {%- endif -%}
+  </div>
+</div>

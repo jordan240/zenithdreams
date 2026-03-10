@@ -1,0 +1,109 @@
+{% comment %} sections/featured-collection.liquid {% endcomment %}
+
+<section class="section-featured section-pad" id="featured-collection">
+  <div class="container">
+
+    <!-- Section header -->
+    <div class="text-center mb-5 fade-up">
+      <p class="section-subtitle">{{ section.settings.subtitle | default: 'Just Dropped' }}</p>
+      <h2 class="section-title">{{ section.settings.title | default: 'New Arrivals' }}</h2>
+      <div class="gold-divider"></div>
+    </div>
+
+    <!-- Product grid -->
+    <div class="row g-4">
+      {%- assign collection = collections[section.settings.collection] -%}
+
+      {%- if collection != blank and collection.products.size > 0 -%}
+        {%- for product in collection.products limit: section.settings.products_to_show -%}
+          <div class="col-6 col-md-4 col-lg-3 fade-up">
+            {% render 'product-card', product: product %}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Placeholder cards when no collection is selected -->
+        {%- for i in (1..4) -%}
+          <div class="col-6 col-md-4 col-lg-3 fade-up">
+            <div class="product-card">
+              <div class="product-card-image-wrap">
+                <div class="img-placeholder">
+                  <span>Product {{ i }}</span>
+                </div>
+                <div class="product-card-overlay">
+                  <button class="btn-outline-gold" style="font-size:0.68rem; padding:0.6em 1.4em;">Quick View</button>
+                </div>
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-title">Sample Product {{ i }}</div>
+                <div class="product-card-price">${{ i | times: 35 | plus: 45 }}.00</div>
+                <button class="btn-add-cart">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    <!-- View all link -->
+    {%- if section.settings.show_view_all -%}
+      <div class="text-center mt-5 fade-up">
+        <a href="{{ collection.url | default: routes.collections_url }}" class="btn-outline-gold">
+          {{ section.settings.view_all_text | default: 'View All' }}
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Just Dropped"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "New Arrivals"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection to feature"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View All' button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "'View All' button text",
+      "default": "View All"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

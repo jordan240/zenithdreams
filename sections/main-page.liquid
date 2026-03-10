@@ -1,0 +1,28 @@
+{% comment %} sections/main-page.liquid {% endcomment %}
+
+<div style="padding-top: 100px;" class="section-pad">
+  <div class="container">
+
+    <div class="page-hero text-center mb-5 fade-up" style="padding-top:0; border-bottom:none;">
+      <p class="section-subtitle">{{ page.author }}</p>
+      <h1 class="section-title">{{ page.title }}</h1>
+      <div class="gold-divider"></div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8 fade-up">
+        <div class="page-content">
+          {{ page.content }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+{% comment %} sections/hero-banner.liquid {% endcomment %}
+
+<section class="hero-section" id="hero">
+  <div class="hero-bg"
+       {% if section.settings.hero_image != blank %}
+         style="background-image: url('{{ section.settings.hero_image | image_url: width: 1920 }}')"
+       {% else %}
+         style="background: linear-gradient(135deg, #0d0d0d 0%, #1a1a0d 50%, #0d0d0d 100%)"
+       {% endif %}>
+  </div>
+  <div class="hero-bg-overlay"></div>
+
+  <div class="hero-content container">
+    <span class="hero-eyebrow fade-up">
+      {{ section.settings.eyebrow | default: 'New Season 2026' }}
+    </span>
+    <h1 class="hero-heading fade-up">
+      {{ section.settings.heading | default: 'Elevate Your Style' }}
+    </h1>
+    <p class="hero-subheading fade-up">
+      {{ section.settings.subheading | default: 'Luxury meets streetwear. Discover the newest collection from Zenith Dreams — where every piece tells a story.' }}
+    </p>
+    <div class="fade-up">
+      <a href="{{ section.settings.cta_link | default: routes.collections_url }}"
+         class="btn-gold">
+        {{ section.settings.cta_text | default: 'Shop Now' }}
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span></span>
+    Scroll
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "New Season 2026"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Elevate Your Style"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Luxury meets streetwear. Discover the newest collection from Zenith Dreams — where every piece tells a story."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "category": "Hero"
+    }
+  ]
+}
+{% endschema %}

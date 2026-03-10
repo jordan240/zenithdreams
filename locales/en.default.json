@@ -1,0 +1,45 @@
+{
+  "general": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you're looking for doesn't exist."
+    }
+  },
+  "products": {
+    "add_to_cart": "Add to Cart",
+    "sold_out": "Sold Out",
+    "quick_view": "Quick View",
+    "size_guide": "Size Guide",
+    "quantity": "Quantity"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "checkout": "Proceed to Checkout",
+    "continue_shopping": "Continue Shopping",
+    "remove": "Remove",
+    "update": "Update Cart",
+    "item_count": {
+      "one": "{{ count }} item",
+      "other": "{{ count }} items"
+    }
+  },
+  "newsletter": {
+    "title": "Join the Dream",
+    "placeholder": "Your email address",
+    "subscribe": "Subscribe",
+    "success": "Subscribed!"
+  },
+  "navigation": {
+    "home": "Home",
+    "shop": "Shop",
+    "collections": "Collections",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "door_entrance": {
+    "click_to_enter": "Click to Enter",
+    "tagline": "Luxury Streetwear"
+  }
+}

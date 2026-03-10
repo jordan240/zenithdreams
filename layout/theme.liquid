@@ -57,11 +57,6 @@
 
 <body class="template-{{ template | replace: '.', '-' | replace: '/', '-' }}">
 
-  <!-- Door Entrance (only on homepage) -->
-  {%- if template == 'index' -%}
-    {% section 'door-entrance' %}
-  {%- endif -%}
-
   <!-- Header -->
   {% section 'header' %}
 

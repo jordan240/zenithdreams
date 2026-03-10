@@ -29,7 +29,6 @@
   flex: 1;
   position: relative;
   transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-  transform-origin: outside;
   overflow: hidden;
 }
 
